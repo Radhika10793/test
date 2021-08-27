@@ -1,0 +1,55 @@
+package sakshi;
+
+import java.beans.Statement;
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.util.ArrayList;
+import java.util.Iterator;
+
+public class dbcartoonDetails {
+
+
+
+
+
+	public static void main(String args[])
+	{
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection con=DriverManager.getConnection("jdbc:mysql://loca;host:3306/register","root","root");
+			java.sql.Statement st=con.createStatement();
+			FileInputStream fstream=new  FileInputStream("data.txt");
+			DataInputStream in=new DataInputStream(fstream);
+			BufferedReader br=new BufferedReader(new InputStreamReader(in));
+			boolean strLine;
+			ArrayList list=new ArrayList();
+			while ((strLine=br.readLine()!=null)){
+				list.add(strLine);
+			}
+			Iterator itr;
+			for(itr=list.iterator();
+					itr.hasNext();)
+					{
+						String str=itr.next().toString();
+						String[] splitSt=str.split("");
+						String id="",name="",address="",bornyear="",salary="";
+						for(int i=0;i<splitSt.length;i++)
+						{
+							name=splitSt[0];
+							name=splitSt[1];
+							name=splitSt[2];
+							name=splitSt[3];
+						}
+						int k=((java.sql.Statement) st).executeUpdate("insert into student(name,address,bornyear,salary)values("+name+","+address+","+bornyear+","+salary+")");
+						
+						
+		}
+		}
+		catch(Exception e) {}
+	}
+}
+
